@@ -14,13 +14,14 @@ namespace XamarinFormsBinding
 		{
 			InitializeComponent();
 
-            //MainPage = new XamarinFormsBinding.MainPage();
+            MainPage = new XamarinFormsBinding.Pages.ChartGettingStarted();
 
-            var contactList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
+            // FreshMvvmBinding
+            //var contactList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
 
-            var navContainer = new FreshMvvm.FreshNavigationContainer(contactList);
+            //var navContainer = new FreshMvvm.FreshNavigationContainer(contactList);
 
-            MainPage = navContainer;
+            //MainPage = navContainer;
 		}
 
 		protected override void OnStart ()
