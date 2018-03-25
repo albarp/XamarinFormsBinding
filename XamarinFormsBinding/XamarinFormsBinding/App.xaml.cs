@@ -6,13 +6,22 @@ using System.Text;
 using Xamarin.Forms;
 using XamarinFormsBinding.PageModels;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+
 namespace XamarinFormsBinding
 {
 	public partial class App : Application
 	{
 		public App ()
 		{
-			InitializeComponent();
+            AppCenter.Start("android=944f3bf7-bf13-4adc-b420-c91b11d93be3;" +
+                  "uwp={Your UWP App secret here};" +
+                  "ios={Your iOS App secret here}",
+                  typeof(Analytics), typeof(Crashes));
+
+            InitializeComponent();
 
             MainPage = new XamarinFormsBinding.Pages.ChartGettingStarted();
 
