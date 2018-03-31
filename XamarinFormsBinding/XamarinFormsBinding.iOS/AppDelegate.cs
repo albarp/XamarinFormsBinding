@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace XamarinFormsBinding.iOS
@@ -23,8 +19,6 @@ namespace XamarinFormsBinding.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-
-            Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
 
             LoadApplication(new App());
 

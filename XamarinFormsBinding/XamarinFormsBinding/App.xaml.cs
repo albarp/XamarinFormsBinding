@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using XamarinFormsBinding.PageModels;
 
 using Microsoft.AppCenter;
@@ -23,15 +18,13 @@ namespace XamarinFormsBinding
 
             InitializeComponent();
 
-            MainPage = new XamarinFormsBinding.Pages.ChartGettingStarted();
-
             // FreshMvvmBinding
-            //var contactList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
+            var contactList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
 
-            //var navContainer = new FreshMvvm.FreshNavigationContainer(contactList);
+            var navContainer = new FreshMvvm.FreshNavigationContainer(contactList);
 
-            //MainPage = navContainer;
-		}
+            MainPage = navContainer;
+        }
 
 		protected override void OnStart ()
 		{
