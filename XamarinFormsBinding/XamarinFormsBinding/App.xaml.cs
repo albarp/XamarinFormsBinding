@@ -4,6 +4,9 @@ using XamarinFormsBinding.PageModels;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using XamarinFormsBinding.Features;
+using XamarinFormsBinding.FeaturesManager;
+using XamarinFormsBinding.PlainMVVMViewModel;
 
 namespace XamarinFormsBinding
 {
@@ -18,12 +21,43 @@ namespace XamarinFormsBinding
 
             InitializeComponent();
 
-            // FreshMvvmBinding
-            var contactList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
+            FeatureToggleRegistry.Add<PlainMVVMFeature>(true);
 
-            var navContainer = new FreshMvvm.FreshNavigationContainer(contactList);
 
-            MainPage = navContainer;
+            if (Feature.IsEnabled<PlainMVVMFeature>())
+            {
+                var quoteViewModel = new QuoteViewModel();
+
+                var entry = new Entry();
+                // Con OneWayToSource, è la entry che spedisce il suo valore al modello che a sua volta aggiorna la QuoteView
+                entry.SetBinding(Entry.TextProperty, "QuoteName", BindingMode.OneWayToSource); 
+                entry.HorizontalOptions = LayoutOptions.FillAndExpand;
+
+                var button = new Button();
+                button.Text = "Reset Text";
+                button.SetBinding(Button.CommandProperty, "ResetQuoteName");
+
+                MainPage = new ContentPage {
+                    Content  = new StackLayout{
+                        VerticalOptions = LayoutOptions.Center,
+                        Children = {
+                            entry,
+                            new QuoteView(),
+                            button
+                        }
+                    },
+                    BindingContext = quoteViewModel
+                };
+            }
+            else
+            {
+                // FreshMvvmBinding
+                var contactList = FreshMvvm.FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
+
+                var navContainer = new FreshMvvm.FreshNavigationContainer(contactList);
+
+                MainPage = navContainer;
+            }
         }
 
 		protected override void OnStart ()
