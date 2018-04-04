@@ -13,7 +13,14 @@ namespace XamarinFormsBinding.PageModels
         {
             base.Init(initData);
 
-            Contact = (Contact)initData;
+            Contact = (Contact)initData;;
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+
+            CoreMethods.DisplayAlert("Wired", "Done", "Cancel");
         }
     }
 }

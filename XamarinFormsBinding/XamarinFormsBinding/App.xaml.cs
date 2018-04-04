@@ -21,7 +21,7 @@ namespace XamarinFormsBinding
 
             InitializeComponent();
 
-            FeatureToggleRegistry.Add<PlainMVVMFeature>(true);
+            FeatureToggleRegistry.Add<PlainMVVMFeature>(false);
 
 
             if (Feature.IsEnabled<PlainMVVMFeature>())
