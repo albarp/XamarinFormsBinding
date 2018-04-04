@@ -7,13 +7,23 @@ using Microsoft.AppCenter.Crashes;
 using XamarinFormsBinding.Features;
 using XamarinFormsBinding.FeaturesManager;
 using XamarinFormsBinding.PlainMVVMViewModel;
+using XamarinFormsBinding.Services;
+using Acr.UserDialogs;
 
 namespace XamarinFormsBinding
 {
 	public partial class App : Application
 	{
+        private void SetupIOC()
+        {
+            FreshMvvm.FreshIOC.Container.Register<IDataService, DataService>();
+            FreshMvvm.FreshIOC.Container.Register<IUserDialogs>(UserDialogs.Instance);
+        }
+
 		public App ()
 		{
+            SetupIOC();
+
             AppCenter.Start("android=944f3bf7-bf13-4adc-b420-c91b11d93be3;" +
                   "uwp={Your UWP App secret here};" +
                   "ios={Your iOS App secret here}",

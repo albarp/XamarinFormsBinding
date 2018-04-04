@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using XamarinFormsBinding.Models;
+using XamarinFormsBinding.Services;
 
 namespace XamarinFormsBinding.PageModels
 {
@@ -9,20 +11,24 @@ namespace XamarinFormsBinding.PageModels
     {
         public List<Contact> ContactList { get; set; }
 
-        public ContactListPageModel()
-        {
+        private IDataService _dataService;
+        private IUserDialogs _userDialogs;
 
+        public ContactListPageModel(IDataService dataService, IUserDialogs userDialogs)
+        {
+            _dataService = dataService;
+            _userDialogs = userDialogs;
         }
 
-        public override void Init(object initData)
+        public override async void Init(object initData)
         {
             base.Init(initData);
 
-            ContactList = new List<Contact>
-            {
-                new Contact{Name="AAAA", Number="123456"},
-                new Contact{Name="BBBB", Number="789456"}
-            };
+            _userDialogs.ShowLoading();
+
+            ContactList = await _dataService.GetContacts();
+
+            _userDialogs.HideLoading();
         }
 
         public Contact SelectedContact
