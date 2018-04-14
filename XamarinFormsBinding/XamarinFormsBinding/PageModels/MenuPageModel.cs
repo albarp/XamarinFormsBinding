@@ -34,5 +34,15 @@ namespace XamarinFormsBinding.PageModels
                 });
             }
         }
+        public Command ShowContacts
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<ContactListPageModel>();
+                });
+            }
+        }
     }
 }

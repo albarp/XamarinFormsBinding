@@ -6,7 +6,8 @@
         <TableView Intent="Menu">
             <TableRoot>
                 <TableSection Title="Menu">
-                    <TextCell Text="pippo" Command="{Binding ShowQuotes}"/>
+                    <TextCell Text="Quotes" Command="{Binding ShowQuotes}"/>
+                    <TextCell Text="Contacts" Command="{Binding ShowQuotes}"/>
                 </TableSection>
             </TableRoot>
         </TableView>
