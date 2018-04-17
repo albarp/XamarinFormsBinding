@@ -8,10 +8,10 @@ namespace XamarinFormsBinding.Services
 {
     public interface IDataService
     {
-        Task<List<Contact>> GetContacts();
+        List<Contact> GetContacts();
 
         List<Quote> GetQuotes();
 
-        Task<bool> UpdateQuote(Quote quote);
+        void UpdateQuote(Quote quote);
     }
 }

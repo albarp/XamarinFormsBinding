@@ -21,13 +21,13 @@ namespace XamarinFormsBinding.PageModels
             _userDialogs = userDialogs;
         }
 
-        public override async void Init(object initData)
+        public override void Init(object initData)
         {
             base.Init(initData);
 
             _userDialogs.ShowLoading();
 
-            ContactList = await _dataService.GetContacts();
+            ContactList = _dataService.GetContacts();
 
             _userDialogs.HideLoading();
         }

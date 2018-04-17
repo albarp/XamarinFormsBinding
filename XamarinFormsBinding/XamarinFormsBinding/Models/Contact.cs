@@ -10,8 +10,8 @@ namespace XamarinFormsBinding.Models
 
         public string Name { get; set; }
 
+        public int Id { get; internal set; }
 
-        public string Number { get; set; }
-
+        public string Phone { get; internal set; }
     }
 }

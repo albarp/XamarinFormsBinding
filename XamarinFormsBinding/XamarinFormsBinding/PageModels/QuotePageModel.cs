@@ -33,7 +33,7 @@ namespace XamarinFormsBinding.PageModels
             get
             {
                 return new Command(async () => {
-                    await _dataService.UpdateQuote(Quote);
+                    _dataService.UpdateQuote(Quote);
                     await CoreMethods.PopPageModel();
                 });
             }

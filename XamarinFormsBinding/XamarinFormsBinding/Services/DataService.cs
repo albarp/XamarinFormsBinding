@@ -8,27 +8,55 @@ namespace XamarinFormsBinding.Services
 {
     class DataService : IDataService
     {
-        private List<Quote> _quotes;
+        private List<Contact> _contacts;
+        private List<Quote> _quotes; 
 
         public DataService()
         {
+            _contacts = InitContacts();
             _quotes = InitQuotes();
         }
 
-        public List<Quote> GetQuotes()
+        
+
+        //public async Task<List<Contact>> GetContacts()
+        //{
+        //    await Task.Delay(TimeSpan.FromSeconds(5));
+
+        //    return new List<Contact>
+        //    {
+        //        new Contact{Name="AAAA", Number="123456"},
+        //        new Contact{Name="BBBB", Number="789456"}
+        //    };
+        //}
+
+        private List<Contact> InitContacts()
         {
-            return _quotes;
+            return new List<Contact> {
+                new Contact { Id = 1, Name = "Xam Consulting", Phone = "0404 865 350" },
+                new Contact { Id = 2, Name = "Michael Ridland", Phone = "0404 865 350" },
+                new Contact { Id = 3, Name = "Thunder Apps", Phone = "0404 865 350" },
+            };
         }
 
-        public async Task<List<Contact>> GetContacts()
+        public List<Contact> GetContacts()
         {
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            return _contacts;
+        }
 
-            return new List<Contact>
+        public void UpdateContact(Contact contact)
+        {
+            if (contact.Id == 0)
             {
-                new Contact{Name="AAAA", Number="123456"},
-                new Contact{Name="BBBB", Number="789456"}
-            };
+                contact.Id = _contacts.Count + 1;
+                _contacts.Add(contact);
+            }
+            else
+            {
+                var oldContact = _contacts.Find(c => c.Id == contact.Id);
+                oldContact.Name = contact.Name;
+                oldContact.Phone = contact.Phone;
+            }
         }
 
         private List<Quote> InitQuotes()
@@ -40,10 +68,13 @@ namespace XamarinFormsBinding.Services
             };
         }
 
-        public async Task<bool> UpdateQuote(Quote quote)
+        public List<Quote> GetQuotes()
         {
-            await Task.Delay(3000);
+            return _quotes;
+        }
 
+        public void UpdateQuote(Quote quote)
+        {
             if(quote.Id == 0)
             {
                 quote.Id = _quotes.Count + 1;
@@ -60,7 +91,6 @@ namespace XamarinFormsBinding.Services
 
             _quotes.Add(quote);
 
-            return true;
         }
     }
 }
