@@ -9,6 +9,7 @@ using XamarinFormsBinding.FeaturesManager;
 using XamarinFormsBinding.PlainMVVMViewModel;
 using XamarinFormsBinding.Services;
 using Acr.UserDialogs;
+using FreshMvvm;
 
 namespace XamarinFormsBinding
 {
@@ -31,19 +32,28 @@ namespace XamarinFormsBinding
 
             InitializeComponent();
 
-            FeatureToggleRegistry.Add<PlainMVVMFeature>(false);
-            FeatureToggleRegistry.Add<SingleNavFeature>(true);
+            MainPage = new LaunchPage(this);
+
+            //FeatureToggleRegistry.Add<PlainMVVMFeature>(false);
+            //FeatureToggleRegistry.Add<SingleNavFeature>(true);
 
 
 
-            if (Feature.IsEnabled<PlainMVVMFeature>())
-            {
-                SetupPlainMVVM();
-            }
-            else if(Feature.IsEnabled<SingleNavFeature>())
-            {
-                SetupSingleNav();
-            }
+            //if (Feature.IsEnabled<PlainMVVMFeature>())
+            //{
+            //    SetupPlainMVVM();
+            //}
+            //else if(Feature.IsEnabled<SingleNavFeature>())
+            //{
+            //    SetupSingleNav();
+            //}
+        }
+
+        public void LoadBasicNav()
+        {
+            var page = FreshPageModelResolver.ResolvePageModel<MenuPageModel>();
+            var basicNavContainer = new FreshNavigationContainer(page);
+            MainPage = basicNavContainer;
         }
 
         private void SetupSingleNav()
